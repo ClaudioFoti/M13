@@ -1,17 +1,33 @@
 version: "1.0"
 services:
+  db:
+    ports:
+      - "3306:3306"
+    image: "ubuntu/mysql"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+    - mysqldb:/home/db/
   web1:
     build: .
     ports:
       - "8081:8080"
     image: "webapp"
+    environment:
+      - NAME=webapp1
   web2:
     build: .
     ports:
       - "8082:8080"
     image: "webapp"
+    environment:
+      - NAME=webapp2
   web3:
     build: .
     ports:
       - "8083:8080"
     image: "webapp"
+    environment:
+      - NAME=webapp3
+volumes:
+  mysqldb:

@@ -1,0 +1,2 @@
+#!/bin/bash
+mysql -u root -Bse 'drop database if exists module13;create database module13; use module13; create table hosts ( id INT NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, host_id VARCHAR(100) NOT NULL, PRIMARY KEY ( id ) );insert into hosts (name,host_id) values ("webapp1","uid_webapp1");insert into hosts (name,host_id) values ("webapp2","uid_webapp2");insert into hosts (name,host_id) values ("webapp3","uid_webapp3");'

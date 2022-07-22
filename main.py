@@ -1,5 +1,7 @@
 from flask import Flask
 import uuid
+import mysql.connector
+import os
 
 app = Flask(__name__)
 
@@ -9,7 +11,20 @@ def index():
 
 @app.route("/host_id")
 def host_id():
-    host_id = str(uuid.uuid4())
+    name = os.environ['NAME']
+    
+    db = mysql.connector.connect(
+        host="db",
+        user="root",
+        password="",
+        database="module13"
+    )
+
+    cursor = db.cursor()
+    cursor.execute("SELECT host_id FROM hosts where name = '"+ name +"'")
+    result = cursor.fetchone()
+
+    host_id = str(result[0])
     return host_id
 
 @app.route("/health")
